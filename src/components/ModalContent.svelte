@@ -19,7 +19,7 @@
   export let onOkay = () => {
     dados.mensagem = marked(dados.mensagem);
     console.log(dados);
-    fetch("https://backendmz.herokuapp.com/send", {
+    fetch(process.env.BACKEND, {
       method: "POST",
       body: JSON.stringify(dados),
       headers: {
