@@ -1,14 +1,17 @@
 <script>
 	import ServicesBox from "../components/servicesBox.svelte";
+	import Modal from "svelte-simple-modal";
 </script>
 
 <svelte:head>
-	<title>MZ Developer!!!</title>
+	<title>Zaghetto - Desenvolvedor Frontend</title>
 </svelte:head>
 
-<h1>Serviços prestados</h1>
+<Modal closeButton={false}>
+	<h1>Serviços prestados</h1>
 
-<ServicesBox />
+	<ServicesBox />
+</Modal>
 
 <style lang="postcss">
 	h1 {

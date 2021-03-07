@@ -1,4 +1,32 @@
 <script>
+  import { fly } from "svelte/transition";
+  import { getContext } from "svelte";
+  import ModalContent from "./ModalContent.svelte";
+
+  const { open } = getContext("simple-modal");
+
+  const showSurprise = (assunto) => {
+    open(
+      ModalContent,
+      { assunto },
+      {
+        transitionWindow: fly,
+        transitionWindowProps: {
+          y: -500,
+          duration: 1000,
+        },
+        styleWindow: {
+          width: "fit-content",
+          borderRadius: "15px",
+          border: "1px solid #DADAE5",
+        },
+        styleContent: {
+          padding: "0",
+        },
+      }
+    );
+  };
+
   let test = [
     {
       cor: "bg-gradient-to-r from-green-700 to-green-600",
@@ -82,6 +110,7 @@
             </p>
             <button
               class="p-2 rounded-lg font-sans transition duration-1000 ease-in-out bg-green-900 transform hover:-translate-y-1 hover:scale-105 text-white"
+              on:click={() => showSurprise(e.title)}
             >
               <a href=".">Contratar</a>
             </button>
@@ -196,7 +225,7 @@
     }
 
     .serviceBox .title {
-      @apply font-sans text-2xl min-h-4 grid content-center;
+      @apply font-sans text-2xl min-h-4/5 grid content-center;
     }
   }
 
