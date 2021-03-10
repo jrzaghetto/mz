@@ -44,10 +44,7 @@
   }
 </script>
 
-<div
-  id="começaAqui"
-  class="bg-gray-100 flex rounded-2xl flex-col justify-center"
->
+<div class="bg-gray-100 flex rounded-2xl flex-col justify-center">
   <div class="relative sm:max-w-xl sm:mx-auto">
     <div class="relative px-4 py-10 bg-white rounded-2xl md:mx-0 sm:p-10">
       <div class="max-w-md mx-auto">
