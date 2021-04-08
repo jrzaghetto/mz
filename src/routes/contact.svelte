@@ -1,10 +1,13 @@
 <script>
+  import { acts } from "@tadashi/svelte-notification";
   import marked from "marked";
-  export let assunto = "";
   import MaskInput from "svelte-input-mask/MaskInput.svelte";
 
-  let value = "";
-  let nome, email, telefone, mensagem;
+  const getPhone = (e) => {
+    telefone = e.detail.inputState.maskedValue.replace("-", "");
+  };
+
+  let nome, email, telefone, assunto, mensagem;
   let dados = {
     nome,
     email,
@@ -15,8 +18,8 @@
 
   export let onCancel = () => {};
   export let onOkay = () => {
+    dados.telefone = telefone;
     dados.mensagem = marked(dados.mensagem);
-    console.log(dados);
     fetch("https://backendmz.herokuapp.com/send", {
       method: "POST",
       body: JSON.stringify(dados),
@@ -26,7 +29,11 @@
       },
     }).then((response) => {
       if (response.ok) {
-        console.log("FOI!");
+        acts.add({
+          mode: "success",
+          message: "Mensagem enviada!",
+          lifetime: 10,
+        });
       }
     });
   };
@@ -36,7 +43,13 @@
   }
 
   function _onOkay() {
-    onOkay(value);
+    onOkay();
+    document.getElementById("contact").reset();
+    dados.nome = "";
+    dados.email = "";
+    dados.telefone = "";
+    dados.assunto = "";
+    dados.mensagem = "";
   }
 </script>
 
@@ -44,7 +57,7 @@
   <title>Contato</title>
 </svelte:head>
 
-<p>O site está em manutenção. Nos próximos dias estará 100%</p>
+<p>O site está em manutenção. Nos próximos dias o site estará 100%</p>
 <br />
 
 <div class="bg-gray-100 flex rounded-2xl flex-col justify-center">
@@ -73,10 +86,10 @@
           <div
             class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
           >
-            <form on:submit|preventDefault={_onOkay}>
+            <form id="contact" on:submit|preventDefault={_onOkay}>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="text-sm text-gray-400">Nome</label>
+                  <label for="name" class="text-sm text-gray-400">Nome</label>
                   <div class="w-full inline-flex border">
                     <div class="w-1/12 pt-2 bg-gray-100">
                       <svg
@@ -95,6 +108,8 @@
                     </div>
                     <input
                       bind:value={dados.nome}
+                      id="name"
+                      name="name"
                       type="text"
                       class="w-11/12 sm:text-sm focus:ring-4 focus:outline-none focus:ring-green-500 focus:ring-opacity-50 p-2"
                       placeholder="Seu Nome Aqui"
@@ -102,7 +117,7 @@
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Email</label>
+                  <label for="email" class="text-sm text-gray-400">Email</label>
                   <div class="w-full inline-flex border">
                     <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                       <svg
@@ -121,6 +136,8 @@
                     </div>
                     <input
                       bind:value={dados.email}
+                      id="email"
+                      name="email"
                       type="email"
                       class="w-11/12 sm:text-sm focus:outline-none focus:text-gray-600 p-2"
                       placeholder="email@examplo.com.br"
@@ -129,7 +146,9 @@
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Telefone Celular</label>
+                  <label for="telefone" class="text-sm text-gray-400"
+                    >Telefone Celular</label
+                  >
                   <div class="w-full inline-flex border">
                     <div class="pt-2 w-1/12 bg-gray-100">
                       <svg
@@ -147,17 +166,22 @@
                       </svg>
                     </div>
                     <MaskInput
+                      id="email"
+                      name="email"
                       mask="00 00000 - 0000"
                       type="text"
-                      bind:value={dados.telefone}
+                      {telefone}
                       class="w-11/12 sm:text-sm focus:outline-none focus:text-gray-600 p-2"
                       placeholder="(XX) XXXXX - XXXX"
                       required
+                      on:change={getPhone}
                     />
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Assunto</label>
+                  <label for="subject" class="text-sm text-gray-400"
+                    >Assunto</label
+                  >
                   <div class="w-full inline-flex border">
                     <div class="w-1/12 pt-2 bg-gray-100">
                       <svg
@@ -173,8 +197,10 @@
                       </svg>
                     </div>
                     <input
+                      bind:value={dados.assunto}
+                      id="subject"
+                      name="subject"
                       type="text"
-                      bind:value={assunto}
                       class="w-11/12 sm:text-sm focus:outline-none focus:text-gray-600 p-2"
                       placeholder="Assunto"
                     />
@@ -183,7 +209,9 @@
               </div>
 
               <div class="flex flex-col">
-                <label class="text-sm text-gray-400">Mensagem</label>
+                <label for="message" class="text-sm text-gray-400"
+                  >Mensagem</label
+                >
                 <textarea
                   type="text"
                   bind:value={dados.mensagem}
@@ -197,6 +225,8 @@
               <div class="pt-4 flex items-center space-x-4">
                 <button
                   on:click={_onCancel}
+                  id="message"
+                  name="message"
                   type="cancel"
                   class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none"
                 >

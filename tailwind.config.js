@@ -57,6 +57,8 @@ module.exports = {
       '10': '10rem',
       '1': '15rem',
       '5xl': '64rem',
+      'screen': '100vh',
+      'auto': 'auto'
     }
   },
   plugins: [],

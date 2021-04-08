@@ -9,7 +9,6 @@
 		btn.classList.toggle("open");
 		nav.classList.toggle("flex");
 		nav.classList.toggle("hidden");
-		console.log("Foi");
 	}
 
 	onMount(() => {
@@ -55,17 +54,17 @@
 			<a
 				on:click={navToggle}
 				aria-current={segment === "skills" ? "page" : undefined}
-				href="skills">skills</a
+				href="contact">skills</a
 			>
 			<a
 				on:click={navToggle}
 				aria-current={segment === "works" ? "page" : undefined}
-				href="works">trabalhos</a
+				href="contact">trabalhos</a
 			>
 			<a
 				on:click={navToggle}
 				aria-current={segment === "blog" ? "page" : undefined}
-				href="blog">blog</a
+				href="contact">blog</a
 			>
 			<a
 				on:click={navToggle}

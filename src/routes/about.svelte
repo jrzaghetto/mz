@@ -8,6 +8,7 @@
 			Marcos
 			<span class="text-primary">Zaghetto</span>
 		</h1>
+		about
 		<div
 			class="subheading mb-5"
 			style="    text-transform: uppercase;
@@ -19,37 +20,36 @@
 			Desenvolvedor Front-End
 		</div>
 		<p class="lead mb-2">
-			Atuo com Desenvolvimento PHP há mais de 10 anos e tenho uma grande
-			experiência com Desenvolvimento Web em geral (<em>Full-Stack</em>),
-			trabalhando com tecnologias como PHP, <em>Framework</em> Laravel, MySQL, PostgreSQL,
-			HTML, CSS, JavaScript, jQuery, Bootstrap e outras.
+			Atuo com Desenvolvimento Front-End em tempo integral e tenho uma grande
+			experiência com Desenvolvimento Web em geral (<em
+				class="text-light-blue-600 font-semibold">Full-Stack</em
+			>), trabalhando com tecnologias como HTML, CSS, JavaScript, Python,
+			NodeJS, Svelte, ReactJS, React Native, Bootstrap, Tailwind e outras.
 		</p>
+		<br />
 		<p class="lead mb-2">
-			Sou autor do <a href="https://rberaldo.com.br/" target="_blank"
-				>Blog do Beraldo</a
-			>, onde publico conteúdos sobre Programação desde 2009.
+			Sou graduado em Análise e Desenvolveimento de Sistemas, pela
+			<a
+				class="text-light-blue-600 font-semibold focus:text-blue-600 hover:text-blue-500"
+				href="https://www.impacta.edu.br"
+				target="_blank">Faculdade Impacta de Tecnologia</a
+			>
 		</p>
+		<br />
 		<p class="lead mb-2">
-			Também sou autor e instrutor do <a
-				href="http://www.ultimatephp.com.br/curso"
-				target="_blank">Curso ULTIMATE PHP</a
-			>, curso <em>online</em> destinado para iniciantes em PHP, com o objetivo
-			de formar profissionais qualificados para o Mercado de Trabalho. Também
-			criei o
-			<a href="http://blog.ultimatephp.com.br/" target="_blank"
-				>Blog do ULTIMATE PHP</a
-			>, com conteúdos básicos sobre PHP.
+			Criei este site com o intuito de escrever sobre o desenvolvimento web na
+			parte do blog e ajudar pessoas que queiram que o seu negócio esteja
+			disponível na internet.
 		</p>
+		<br />
 		<p class="lead mb-2">
-			Sou graduado em <a href="https://web.inf.ufpr.br/bcc/" target="_blank"
-				>Ciência da Computação</a
-			>, pela
-			<a href="https://www.ufpr.br" target="_blank"
-				>Universidade Federal do Paraná</a
-			>, onde também trabalhei em projetos de pesquisa do
-			<a href="https://www.c3sl.ufpr.br/" target="_blank">C3SL</a>, na área de
-			desenvolvimento de <em>software</em>.
+			Caso tenha interesse em tirar alguma dúvida comigo ou então falar sobre
+			algum assunto, você pode entrar em contato pela seção de <a
+				class="text-light-blue-600 font-semibold focus:text-blue-600 hover:text-blue-500"
+				href="/contact">contato do site</a
+			>.
 		</p>
+		<br />
 		<div class="social-icons mt-5">
 			<a
 				href="https://www.linkedin.com/in/marcos-zaghetto/"
