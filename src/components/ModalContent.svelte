@@ -4,6 +4,7 @@
   import { getContext } from "svelte";
   const { close } = getContext("simple-modal");
   import MaskInput from "svelte-input-mask/MaskInput.svelte";
+  import { acts } from "@tadashi/svelte-notification";
 
   let value = "";
   let nome, email, telefone, mensagem;
@@ -15,8 +16,13 @@
     mensagem,
   };
 
+  const getPhone = (e) => {
+    telefone = e.detail.inputState.maskedValue.replace("-", "");
+  };
+
   export let onCancel = () => {};
   export let onOkay = () => {
+    dados.telefone = telefone;
     dados.mensagem = marked(dados.mensagem);
     console.log(dados);
     fetch("https://backendmz.herokuapp.com/send", {
@@ -28,7 +34,11 @@
       },
     }).then((response) => {
       if (response.ok) {
-        console.log("FOI!");
+        acts.add({
+          mode: "success",
+          message: "Mensagem enviada!",
+          lifetime: 10,
+        });
       }
     });
   };
@@ -73,7 +83,7 @@
             <form on:submit|preventDefault={_onOkay}>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="text-sm text-gray-400">Nome</label>
+                  <label for="name" class="text-sm text-gray-400">Nome</label>
                   <div class="w-full inline-flex border">
                     <div class="w-1/12 pt-2 bg-gray-100">
                       <svg
@@ -99,7 +109,7 @@
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Email</label>
+                  <label for="email" class="text-sm text-gray-400">Email</label>
                   <div class="w-full inline-flex border">
                     <div class="pt-2 w-1/12 bg-gray-100 bg-opacity-50">
                       <svg
@@ -126,7 +136,9 @@
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Telefone Celular</label>
+                  <label for="phone" class="text-sm text-gray-400"
+                    >Telefone Celular</label
+                  >
                   <div class="w-full inline-flex border">
                     <div class="pt-2 w-1/12 bg-gray-100">
                       <svg
@@ -146,15 +158,18 @@
                     <MaskInput
                       mask="00 00000 - 0000"
                       type="text"
-                      bind:value={dados.telefone}
+                      {telefone}
                       class="w-11/12 sm:text-sm focus:outline-none focus:text-gray-600 p-2"
                       placeholder="(XX) XXXXX - XXXX"
                       required
+                      on:change={getPhone}
                     />
                   </div>
                 </div>
                 <div>
-                  <label class="text-sm text-gray-400">Assunto</label>
+                  <label for="subject" class="text-sm text-gray-400"
+                    >Assunto</label
+                  >
                   <div class="w-full inline-flex border">
                     <div class="w-1/12 pt-2 bg-gray-100">
                       <svg
@@ -180,7 +195,9 @@
               </div>
 
               <div class="flex flex-col">
-                <label class="text-sm text-gray-400">Mensagem</label>
+                <label for="message" class="text-sm text-gray-400"
+                  >Mensagem</label
+                >
                 <textarea
                   type="text"
                   bind:value={dados.mensagem}
